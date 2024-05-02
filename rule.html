@@ -37,7 +37,93 @@
             font-size: 2em;
             margin-bottom: 20px;
         }
+        #language-switch {
+            position: fixed;
+            top:  10px;
+            right: 10px;
+            background-color: #fff; /* ボタンの背景色 */
+            color: #000; /* ボタンのテキスト色 */
+            padding: 15px 32px; /* ボタンの内側のスペース（上下のパディング、左右のパディング） */
+            text-align: center; /* テキストの位置 */
+            text-decoration: none; /* テキストの装飾をなくす */
+            display: inline-block;
+            font-size: 16px; /* フォントサイズ */
+            margin: 4px 2px; /* ボタンの外側のスペース（上下のマージン、左右のマージン） */
+            cursor: pointer; /* マウスカーソルをポインタにする */
+            border-radius: 12px; /* ボタンの角を丸くする */
+        }
+
+        #language-switch:hover {
+            background-color: #aaa; /* マウスオーバー時の背景色 */
+        }
     </style>
+    <script>
+        // ルールのテキストを日本語と英語で用意
+        var rules = {
+            en: [
+                "📌ルール1: 話題をそらさない",
+                "💖ルール2: 他人への気配り",
+                "🛡️ルール3: お互いに敬意を払う",
+                "⚔️ルール4: サーバーを安全に保つ",
+                "⚖️ルール5: なりすましの禁止",
+                "🎨ルール6: 著作権の尊重",
+                "📑ルール7: 利用規約の遵守",
+                "📧ルール8: サポートへの連絡"
+            ],
+            jp: [
+                "📌Rule 1: Stay on topic.",
+                "💖Rule 2: Be mindful of others.",
+                "🛡️Rule 3: Be respectful to each other.",
+                "⚔️Rule 4: Keep our server safe.",
+                "⚖️Rule 5: No impersonation.",
+                "🎨Rule 6: Respect copyrights.",
+                "📑Rule 7: Adhere to the Terms of Service.",
+                "📧Rule 8: Contact support."
+            ]
+        };
+
+        var rules1 = {
+            en: [
+                "チャンネルの説明や、名前を確認してチャンネルに合った会話を心がけてください。また、会話の内容が大幅にずれている場合は会話の削除などが行われます。",
+                "過度な返信やリアクション、複数のメンションや連続メンションはやめてください。スパムと判断された場合botによって自動的にタイムアウトになります。サーバーには毎日多くの人々が訪れています。ガイドラインを強化するためにスパム行為は控えましょう。他人に迷惑DMを送らないようにしてください。 個人のサーバーやチャンネル等の成長を目的とした宣伝、広告活動は禁止です。自分のプロジェクトを共有したい場合は他のサーバーで常識の範囲内で行ってください。",
+                "攻撃的な会話やハラスメント、虐待、差別は許されません。これには、脅迫的、わいせつ、中傷的、政治的、性的、加工的、偏見的な内容が含まれます。これら以外のものでも、コミュニティを分裂させるような無関係な内容の会話を助長しないでください。他人の会話した内容へ影響を与えるもの(中傷的なもの、恐怖心を煽る内容、誤った情報、本来の会話からズレた内容等)は削除の対象です。",
+                "攻撃的、不快な内容、NSFWコンテンツの配布は禁止です。ルール3に従い、以下の例を共有しないようにしてください。: HENTAI, ゴア, ショックメディア, 未成年のキャラクターや人物を性的に描写したものテキストからメディアに至るまで、未成年を性的に扱うことの常態化や正当化を示唆するいかなる形式のコンテンツも禁止です。周りが不快に思わない程度にしてください。 discordのプロフィールのアイコンや名前、ニックネームなどもコミュニティにおいて不適切と判断された場合、適切な処置が行われます。",
+                "サーバーのBOTや、管理者、オーナーへのなりすまし行為は禁止です。ルールに関する報告があれば遠慮なく管理者に連絡してください。",
+                "礼儀としてクレジットを明記してください。オリジナル、クリエイターの特定が難しいものは認められません。またクリエイターが使用を許可していないものを使用している場合は削除されます。前提として、クリエイターのプラットフォームや名前が見つからない場合はシェアしないでください。",
+                "禁止事項: アカウントの売買, 貸与, 共有, 取引, NDAコンテンツ等の改変、議論、配布は禁止です。基本的には公式が出している情報での会話を重視してください。",
+                "https://discord.com/channels/1018480018835382344/1184061265287589888 からサポートへの連絡が可能です。",
+                "✏️最終更新: 2024/05/02"
+            ],
+            jp: [
+                "Please check the channel description and the name of the channel to ensure that the conversation is appropriate for the channel. Also, if the conversation is substantially out of line, the conversation will be deleted.",
+                "Please refrain from excessive replies, reactions, multiple mentions, or continuous mentions. If spam is detected, the bot will automatically time out. Many people visit the server every day. Let's avoid spamming to strengthen the guidelines. Do not send annoying DMs to others. Promotion and advertising activities for personal servers, channels, etc. are prohibited. If you want to share your project, do so within the bounds of common sense on other servers.",
+                "Aggressive conversations, harassment, abuse, and discrimination are not allowed. This includes threatening, obscene, defamatory, political, sexual, manipulated, and prejudiced content. Even if it is not included in these, please do not promote conversations that divide the community with irrelevant content.  Content that affects what others have said (defamatory, fear-inducing content, misinformation, content that deviates from the original conversation, etc.) will be deleted.",
+                "Distribution of aggressive, unpleasant content, and NSFW content is prohibited. In accordance with Rule 3, do not share the following examples:  HENTAI, gore, shock media, depictions of underage characters or individuals in a sexual manner Content in any form that suggests the normalization or justification of the sexualization of minors, from text to media, is prohibited. Please keep it to a level that does not make others uncomfortable. If your discord profile icon, name, nickname, etc. is deemed inappropriate by the community, appropriate measures will be taken.",
+                "Impersonation of server BOTs, administrators, or owners is prohibited. If you have any reports related to the rules, please feel free to contact the administrator.",
+                "Please credit as a courtesy. Originals and those that are difficult to identify the creator are not allowed. Also, if you are using something that the creator has not allowed, it will be deleted. As a premise, do not share if you cannot find the creator's platform or name.",
+                "Prohibited items: Buying, lending, sharing, trading, modifying, discussing, or distributing accounts, NDA content, etc. Please focus on conversations based on information officially released.",
+                "You can contact support from https://discord.com/channels/1018480018835382344/1184061265287589888 .",
+                "✏️Last updated: 2024/05/02"
+            ]
+        };
+
+        // 言語切替ボタンがクリックされたときの処理
+        function switchLanguage() {
+            var currentLanguage = document.getElementById("language-switch").innerText;
+            var newLanguage = currentLanguage === "EN" ? "JP" : "EN";
+            document.getElementById("language-switch").innerText = newLanguage;
+
+            // ルールのテキストを新しい言語に切り替え
+            var ruleElements = document.getElementsByClassName("rule-title");
+            for (var i = 0; i < ruleElements.length; i++) {
+                ruleElements[i].innerText = rules[newLanguage.toLowerCase()][i];
+            }
+            var ruleElements1 = document.getElementsByClassName("rule-description");
+            for (var i = 0; i < ruleElements1.length; i++) {
+                ruleElements1[i].innerText = rules1[newLanguage.toLowerCase()][i];
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="rules-container">
@@ -72,11 +158,12 @@
         </div>
         <div class="rule">
             <div class="rule-title">📧ルール8: サポートへの連絡</div>
-            <div class="rule-description"><a href="https://discord.com/channels/1018480018835382344/1184061265287589888">ここのリンク</a>からサポートへの連絡が可能です。</div>
+            <div class="rule-description">https://discord.com/channels/1018480018835382344/1184061265287589888 からサポートへの連絡が可能です。</div>
         </div>
         <div class="rule">
-            <div class="rule-description"><br>✏️最終更新: 2024/05/02</div>
+        <div class="rule-description"><br>✏️最終更新: 2024/05/02</div>
         <!-- 他のルールを追加 -->
     </div>
+    <button id="language-switch" onclick="switchLanguage()">EN</button>
 </body>
 </html>
